@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Form Buah</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <!-- Bootstrap WebJar -->
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.2/css/bootstrap.min.css}" />
+  </head>
+  <body>
+    <div class="wrapper">
+      <!-- Header -->
+      <div th:replace="~{fragments/header :: header}"></div>
+
+      <!-- Content -->
+      <div>
+        <h2>Form Input Buah</h2>
+        <form th:action="@{/buah/save}" th:object="${fruit}" method="post">
+          <input type="hidden" th:field="*{id}" />
+          <div>
+            <label for="name">Nama Buah:</label>
+            <input type="text" id="name" th:field="*{name}" required />
+          </div>
+          <div class="input-last">
+            <label for="price">Harga Buah:</label>
+            <input type="number" id="price" th:field="*{price}" required />
+          </div>
+          <button type="submit" class="btn btn-success">Simpan</button>
+          <a th:href="@{/buah}" class="btn btn-secondary">Kembali</a>
+        </form>
+      </div>
+
+      <!-- Footer -->
+      <div th:replace="~{fragments/footer :: footer}"></div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script th:src="@{/webjars/bootstrap/5.3.2/js/bootstrap.bundle.min.js}"></script>
+  </body>
+</html>

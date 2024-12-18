@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Daftar Buah</title>
+    <!-- Bootstrap CSS -->
+    <!-- Bootstrap WebJar -->
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.2/css/bootstrap.min.css}" />
+    <!-- Custom CSS -->
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+  </head>
+
+  <body>
+    <div class="container-fluid d-flex flex-column min-vh-100">
+      <!-- Header -->
+      <div th:replace="~{fragments/header :: header}"></div>
+
+      <!-- Content -->
+      <main class="flex-grow-1 my-4">
+        <div class="container">
+          <h2 class="text-center mb-4">Daftar Buah</h2>
+          <div class="table-responsive">
+            <table class="table table-striped table-bordered">
+              <thead class="table-primary text-center">
+                <tr>
+                  <th>No</th>
+                  <th>Nama</th>
+                  <th>Harga</th>
+                  <th>Aksi</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr th:each="fruit, iterStat : ${fruits}">
+                  <td class="text-center" th:text="${iterStat.index + 1}"></td>
+                  <td th:text="${fruit.name}"></td>
+                  <td class="text-end" th:text="'Rp ' + ${#numbers.formatDecimal(fruit.price, 0, 'COMMA', 0, 'POINT')}"></td>
+                  <td class="text-center">
+                    <a th:href="@{/buah/edit/{id}(id=${fruit.id})}" class="btn btn-warning btn-sm">Edit</a>
+                    <a th:href="@{/buah/delete/{id}(id=${fruit.id})}" class="btn btn-danger btn-sm" onclick="return confirm('Hapus buah ini?')">Delete</a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="text-center mt-3">
+            <a th:href="@{/buah/form}" class="btn btn-success btn-lg">Tambah Buah</a>
+          </div>
+        </div>
+      </main>
+
+      <!-- Footer -->
+      <div th:replace="~{fragments/footer :: footer}"></div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script th:src="@{/webjars/bootstrap/5.3.2/js/bootstrap.bundle.min.js}"></script>
+  </body>
+</html>
